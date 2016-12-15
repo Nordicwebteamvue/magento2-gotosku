@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset name="Kodbruket">
+    <description>Coding standards for Kodbruket Go To SKU</description>
+    <arg value="p"/>
+    <arg value="v"/>
+    <arg value="n"/>
+    <arg name="colors"/>
+    <rule ref="PSR2"/>
+    <rule ref="PEAR.Commenting.FileComment"/>
+    <rule ref="PEAR.Commenting.ClassComment"/>
+    <rule ref="PEAR.Commenting.FunctionComment"/>
+    <rule ref="PEAR.Commenting.InlineComment"/>
+    <file>Controller</file>
+    <file>Test</file>
+</ruleset>
