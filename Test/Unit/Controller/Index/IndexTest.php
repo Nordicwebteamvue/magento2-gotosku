@@ -14,7 +14,6 @@
 namespace Kodbruket\GoToSku\Test\Unit\Controller\Index;
 
 use Magento\Framework\App\Action\Context;
-use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\Result\RedirectFactory;
@@ -36,12 +35,50 @@ use Magento\Framework\Exception\NoSuchEntityException;
  */
 class IndexTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $requestMock;
 
-    protected $controller;
-    protected $objectManager;
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
     protected $redirectMock;
 
-    public static $string;
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $redirectFactoryMock;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $productUrlMock;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $productMock;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $productRepositoryMock;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $contextMock;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $noSuchEntityExceptionMock;
+
+    /**
+     * @var \Kodbruket\GoToSku\Controller\Index\Index
+     */
+    protected $controller;
 
     /**
      * Set up
@@ -50,7 +87,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-
         $this->requestMock = $this->getMockForAbstractClass(RequestInterface::class, ['getParam'], '', false);
 
         $this->redirectMock = $this->getMock(Redirect::class, ['setHttpResponseCode', 'setUrl'], [], '', false);
@@ -67,16 +103,10 @@ class IndexTest extends \PHPUnit_Framework_TestCase
 
         $this->contextMock = $this->getMock(Context::class, ['getRequest'], [], '', false);
         $this->contextMock->method('getRequest')->willReturn($this->requestMock);
-        
-        $this->objectManager = new ObjectManager($this);
-        $this->controller = $this->objectManager->getObject(
-            'Kodbruket\GoToSku\Controller\Index\Index',
-            [
-                'context' => $this->contextMock,
-                'resultRedirectFactory' => $this->redirectFactoryMock,
-                'productRepository' => $this->productRepositoryMock
-            ]
-        );
+
+        $this->noSuchEntityExceptionMock = $this->getMock(NoSuchEntityException::class, [], [], '', false);
+
+        $this->controller = new \Kodbruket\GoToSku\Controller\Index\Index($this->contextMock, $this->redirectFactoryMock, $this->productRepositoryMock);
     }
 
     /**
@@ -102,8 +132,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase
      */
     public function testExecuteWithoutSku()
     {
-        self::$string = 'Page not found';
-
         $this->requestMock->expects($this->once())
             ->method('getParam')
             ->willReturn(false);
@@ -120,8 +148,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase
      */
     public function testExecuteWithInvalidSku()
     {
-        self::$string = 'Page not found';
-
         $this->requestMock->expects($this->once())
             ->method('getParam')
             ->willReturn('invalid-sku');
@@ -129,7 +155,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         $this->productRepositoryMock->expects($this->once())
             ->method('get')
             ->with('invalid-sku')
-            ->will($this->throwException(new NoSuchEntityException));
+            ->will($this->throwException($this->noSuchEntityExceptionMock));
 
         $this->controller->execute();
     }
@@ -144,7 +170,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         $this->requestMock->expects($this->once())
             ->method('getParam')
             ->willReturn('example-sku');
-
 
         $this->productUrlMock->expects($this->once())
             ->method('getUrl');
@@ -168,8 +193,14 @@ class IndexTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->contextMock = null;
+        $this->requestMock = null;
+        $this->redirectMock = null;
         $this->redirectFactoryMock = null;
+        $this->productUrlMock = null;
+        $this->productMock = null;
         $this->productRepositoryMock = null;
+        $this->contextMock = null;
+        $this->noSuchEntityExceptionMock = null;
+        $this->controller = null;
     }
 }
