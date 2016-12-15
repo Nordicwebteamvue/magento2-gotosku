@@ -4,7 +4,6 @@ sudo: false
 php:
 - 5.6
 - 7.0
-- 7.1
 cache:
   directories:
   - "$HOME/.composer/cache"
@@ -15,7 +14,3 @@ install:
 script:
 - php vendor/bin/phpcs
 - php vendor/bin/phpunit
-env:
-  global:
-    secure: lrS4FylWm0kcFrdXl9Ax0pf9hXAXfJK0+kA3LD2oO3XsYKTa0EyeJjip8PyXNypraqfEzuU8mnv+RWnj40obFcvbYid8sHBdsk6ZjoxjnOwXFleOgHi/TXRjtnUMhuthfSCFPMTjIQmjuWytNtNTEIGVn44bUxIMndNgbEunWUpEz8iEgccPmRH2L4lImoDYI+oEsKXvPfUp6ltOueyrOInLPnpJKuPFR5ZgqKKWRLziMB32eHwOP+v3/jyyH0JY4xnnHVnVwdF/meQZcAX3eT0BELSfv+phOPCwfFc86nTFNfkLgT7hW5Dk7tK/lDna6NdMXNW3K5OgvGAzXlNKLFqt9gF/u/1ZTBPHHA+WnIPuc7x/0Ds8g9o7zjmLZHHOJk626W+6ylPNFGyHMoub/QvtkXQO2n25TOCPYM4sl10pFF4/lDwXLowziTO/ON4NOVS7pYw2vlurCM9XRjExpdAJ4s/D3IJJ4FHfyjI+SNVXc9nh2Sa3Ohj4w506HSYhkbcX3h0cxuKyQcQXf/ie6H3IfSVFWwqlCYf0jkjwOlSWgVVOlLZiDWvPs53QyHI6EgHdiJkcRZQesUH1VEGbZHh02Xq8Gqgpat1P83oOFUz6TRPt85xH/LThbruQy+LtoUGO6I97T3V92I+p30QzAyo+Fl7d2FxsmYPkIjwUEdM=
-    secure: me3OdKjNEoi7itWRcnTGSdA9mkKQ3cMEXVYCdI6h1BJo+Lq6nr2naaZwgEx5FUHfVxmQn8p9nyKFur9hBIViKp3VVbv/aULrtcvwPr/yole9Tyuy1/kruAid6QNmcc5TPvpyimoSEV2E3TaGfTiIvna3EPg1TznSwGwhGh5Q9zSd2hcfFUpw550kbfoaL/yKEnDLqlbYpGBsEGLca/N5r5dJHstMljtJozS4mihCoRvM3DUtt0mESdGmIyy0vw0i/qd1RrDpMCHb/Hgh8zS9D1g5gyW/7HJdgrPOpDA8Ti2hTCZCthF2dKVYuXtTj0mqvyWF0GpZlPwBUP0sw7SEMoh7liOqEoL+P3Fb9NfN6eyW/E/uOKURNK4qkYsBmhC+TpYFEsRehj/U2E+p+rHw3rOjQPPVlJsNH+ID6nNKpZLf/g627cVfBWecvw7L8IHFVlW8bb2dNKXCt1n2Nq4eaVKIGqM+KNEUiasvwBAjwV0iGERdI0r2PurfCiAOYJVW5WmQBRWlTsba6M+z643mScFotdvQVX1rX1rXYs7OXSHGyjClCb1BFP57V+ihe//UvNzM6v7eNDDLtrai5nR9yaQR2RL3hvXGR4GGVGyMo5pKO0re77RBCkmIezrO+FBl6oie81uL/f7U8H4WLtPaJ3+w0g255mWk+By54aXXkVE=
