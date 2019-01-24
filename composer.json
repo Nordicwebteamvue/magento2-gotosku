@@ -1,7 +1,7 @@
 {
     "name": "kodbruket/magento2-gotosku",
     "description": "Module for Magento 2.",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "type": "magento2-module",
     "repositories": [
         {
@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": "~5.6.0|~7.0.0",
+        "php": "~5.6.0|~7.0.0|~7.2.0",
         "magento/module-catalog": "*",
         "magento/framework": "*",
         "magento/zendframework1": "*"
