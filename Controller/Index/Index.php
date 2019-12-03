@@ -50,23 +50,6 @@ class Index extends \Magento\Framework\App\Action\Action
     }
 
     /**
-     * Create value-object \Magento\Framework\Phrase
-     *
-     * @return \Magento\Framework\Phrase
-     */
-    public function __()
-    {
-        $argc = func_get_args();
-
-        $text = array_shift($argc);
-        if (!empty($argc) && is_array($argc[0])) {
-            $argc = $argc[0];
-        }
-
-        return new \Magento\Framework\Phrase($text, $argc);
-    }
-
-    /**
      * Execute
      *
      * @return \Magento\Framework\Controller\Result\RedirectFactory
@@ -79,12 +62,12 @@ class Index extends \Magento\Framework\App\Action\Action
         $sku = $this->getRequest()->getParam('sku', false);
 
         if ($sku === false) {
-            throw new NotFoundException($this->__('Page not found'));
+            throw new NotFoundException(__('Page not found'));
         } else {
             try {
                 $product = $this->productRepository->get($sku);
             } catch (NoSuchEntityException $e) {
-                throw new NotFoundException($this->__('Page not found'));
+                throw new NotFoundException(__('Page not found'));
             }
         }
 
